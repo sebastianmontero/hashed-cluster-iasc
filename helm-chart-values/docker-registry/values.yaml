@@ -1,0 +1,22 @@
+ingress:
+  enabled: true
+  hosts:
+    - registry.hashed.systems
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    cert-manager.io/cluster-issuer: letsencrypt-prod
+    nginx.ingress.kubernetes.io/proxy-body-size: "30720m"
+  tls:
+    - secretName: docker-registry-prod
+      hosts:
+        - registry.hashed.systems
+
+persistence:
+  enabled: true
+  size: 30Gi
+
+secrets:
+  htpasswd: |-
+    hashed:$2y$05$RJpad2icUweuhdBAmjtkQu9y7aVYszblLVseY1iWDZxvO.1Fxayym
+    
+
